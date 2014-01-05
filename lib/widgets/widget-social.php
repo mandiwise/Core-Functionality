@@ -2,21 +2,15 @@
 /**
  * Social Widget
  *
- * @package      Core_Functionality
- * @since        1.0.0
- * @link         https://github.com/billerickson/Core-Functionality
- * @author       Bill Erickson <bill@billerickson.net>
- * @copyright    Copyright (c) 2011, Bill Erickson
- * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
-class BE_Social_Widget extends WP_Widget {
+class CF_Social_Widget extends WP_Widget {
 	
     /**
      * Constructor
      *
      * @return void
      **/
-	function BE_Social_Widget() {
+	function CF_Social_Widget() {
 		$widget_ops = array( 'classname' => 'widget_socials', 'description' => 'Social icon widget' );
 		$this->WP_Widget( 'social-widget', 'Social Widget', $widget_ops );
 	}
@@ -103,7 +97,7 @@ class BE_Social_Widget extends WP_Widget {
 	}
 }
 
-function be_register_social_widget() {
-	register_widget('BE_Social_Widget');
+function cf_register_social_widget() {
+	register_widget('CF_Social_Widget');
 }
-add_action( 'widgets_init', 'be_register_social_widget' );
+add_action( 'widgets_init', 'cf_register_social_widget' );

@@ -2,53 +2,53 @@
 /**
  * Post Types
  *
- * This file registers any custom post types
- *
- * @package      Core_Functionality
- * @since        1.0.0
- * @link         https://github.com/billerickson/Core-Functionality
- * @author       Bill Erickson <bill@billerickson.net>
- * @copyright    Copyright (c) 2011, Bill Erickson
- * @license      http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
 
 /**
- * Create Rotator post type
+ * Create Product post type
  * @since 1.0.0
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  */
 
-function be_register_rotator_post_type() {
-	$labels = array(
-		'name' => 'Rotator Items',
-		'singular_name' => 'Rotator Item',
-		'add_new' => 'Add New',
-		'add_new_item' => 'Add New Rotator Item',
-		'edit_item' => 'Edit Rotator Item',
-		'new_item' => 'New Rotator Item',
-		'view_item' => 'View Rotator Item',
-		'search_items' => 'Search Rotator Items',
-		'not_found' =>  'No rotator items found',
-		'not_found_in_trash' => 'No rotator items found in trash',
-		'parent_item_colon' => '',
-		'menu_name' => 'Rotator'
-	);
-	
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true, 
-		'show_in_menu' => true, 
-		'query_var' => true,
-		'rewrite' => true,
-		'capability_type' => 'post',
-		'has_archive' => false, 
-		'hierarchical' => false,
-		'menu_position' => null,
-		'supports' => array('title','thumbnail','excerpt')
-	); 
+function cf_register_product_post_type() {
 
-	register_post_type( 'rotator', $args );
+	$labels = array(
+		'name'                => 'Products',
+		'singular_name'       => 'Product'
+		'menu_name'           => 'Product'
+		'parent_item_colon'   => 'Parent Product:',
+		'all_items'           => 'All Products',
+		'view_item'           => 'View Product',
+		'add_new_item'        => 'Add New Product',
+		'add_new'             => 'New Product',
+		'edit_item'           => 'Edit Product',
+		'update_item'         => 'Update Product',
+		'search_items'        => 'Search products',
+		'not_found'           => 'No products found',
+		'not_found_in_trash'  => 'No products found in Trash',
+	);
+	$args = array(
+		'label'               => 'product',
+		'description'         => 'Product information pages',
+		'labels'              => $labels,
+		'supports'            => array( ),
+		'taxonomies'          => array( 'category', 'post_tag' ),
+		'hierarchical'        => false,
+		'public'              => true,
+		'show_ui'             => true,
+		'show_in_menu'        => true,
+		'show_in_nav_menus'   => true,
+		'show_in_admin_bar'   => true,
+		'menu_position'       => 5,
+		'menu_icon'           => '',
+		'can_export'          => true,
+		'has_archive'         => true,
+		'exclude_from_search' => false,
+		'publicly_queryable'  => true,
+		'capability_type'     => 'post',
+	);
+	register_post_type( 'product', $args );
+
 }
-add_action( 'init', 'be_register_rotator_post_type' );	
+
+add_action( 'init', 'cf_register_product_post_type', 0 );
