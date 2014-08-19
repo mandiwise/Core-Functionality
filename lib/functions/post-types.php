@@ -24,7 +24,7 @@ class CF_Post_Types {
 	 *
 	 * @since 1.0.0
 	 */
-	public function register_book_post_type() {
+	public static function register_book_post_type() {
 
 		$slug = 'book';
 		$name = 'Books';

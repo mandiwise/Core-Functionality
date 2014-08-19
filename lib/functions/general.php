@@ -36,7 +36,10 @@ class CF_General {
       $plugin = isset( $_REQUEST['plugin'] ) ? $_REQUEST['plugin'] : '';
       check_admin_referer( "activate-plugin_{$plugin}" );
 
-      // Flush permalink rewrite rules
+      // Register all of the post types on activation
+      // e.g. CF_Post_Types::register_book_post_type();
+
+      // Then flush permalink rewrite rules
       flush_rewrite_rules();
 
       // Do other activation things here...

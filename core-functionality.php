@@ -28,6 +28,14 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'CF_DIR', dirname( __FILE__ ) );
 
 /**
+ * General housekeeping and plugin activation tasks
+ *
+ * @since 1.0.0
+ */
+include_once( CF_DIR . '/lib/functions/general.php' );
+register_activation_hook( __FILE__, array( 'CF_General', 'plugin_activation' ) );
+
+/**
  * Post types
  *
  * @since 1.0.0
@@ -40,14 +48,6 @@ define( 'CF_DIR', dirname( __FILE__ ) );
  * @since 1.0.0
  */
 //include_once( CF_DIR . '/lib/functions/taxonomies.php' );
-
-/**
- * General housekeeping and plugin activation tasks
- *
- * @since 1.0.0
- */
-include_once( CF_DIR . '/lib/functions/general.php' );
-register_activation_hook( __FILE__, array( 'CF_General', 'plugin_activation' ) );
 
 /**
  * Editor style refresh
