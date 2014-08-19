@@ -1,10 +1,11 @@
 <?php
 /**
- * Social Widget
+ * SOCIAL WIDGET
  *
  */
+
 class CF_Social_Widget extends WP_Widget {
-	
+
     /**
      * Constructor
      *
@@ -16,7 +17,7 @@ class CF_Social_Widget extends WP_Widget {
 	}
 
 	/**
-	 * Social Options 
+	 * Social Options
 	 *
 	 */
 	function social_options() {
@@ -34,17 +35,17 @@ class CF_Social_Widget extends WP_Widget {
     /**
      * Outputs the HTML for this widget.
      *
-     * @param array  An array of standard parameters for widgets in this theme 
-     * @param array  An array of settings for this widget instance 
+     * @param array  An array of standard parameters for widgets in this theme
+     * @param array  An array of settings for this widget instance
      * @return void Echoes it's output
      **/
 	function widget( $args, $instance ) {
 		extract( $args, EXTR_SKIP );
 		echo $before_widget;
-		
+
 		if( $instance['title'] )
 			echo $before_title . esc_attr( $instance['title'] ) . $after_title;
-			
+
 		echo '<p class="socials">';
 		$socials = $this->social_options();
 		foreach( $socials as $key => $label ) {
@@ -61,12 +62,12 @@ class CF_Social_Widget extends WP_Widget {
      * where any validation should be dealt with.
      *
      * @param array  An array of new settings as submitted by the admin
-     * @param array  An array of the previous settings 
+     * @param array  An array of the previous settings
      * @return array The validated and (if necessary) amended settings
      **/
 	function update( $new_instance, $old_instance ) {
 		$instance = $old_instance;
-		
+
 		$instance['title'] = esc_attr( $new_instance['title'] );
 		$socials = $this->social_options();
 		foreach( $socials as $key => $label )
@@ -74,7 +75,7 @@ class CF_Social_Widget extends WP_Widget {
 
 		return $instance;
 	}
-	
+
     /**
      * Displays the form for this widget on the Widgets page of the WP Admin area.
      *
@@ -82,18 +83,18 @@ class CF_Social_Widget extends WP_Widget {
      * @return void Echoes it's output
      **/
 	function form( $instance ) {
-	
+
 		$socials = $this->social_options();
 		$defaults = array( 'title' => '' );
 		foreach( $socials as $key => $label )
 			$defaults[$key] = '';
-		$instance = wp_parse_args( (array) $instance, $defaults ); 
-		
+		$instance = wp_parse_args( (array) $instance, $defaults );
+
 		echo '<p><label for="' . $this->get_field_id( 'title' ) . '">Title: <input class="widefat" id="' . $this->get_field_id( 'title' ) .'" name="' . $this->get_field_name( 'title' ) . '" value="' . esc_attr( $instance['title'] ) . '" /></label></p>';
-		
+
 		foreach( $socials as $key => $label )
 			echo '<p><label for="' . $this->get_field_id( $key ) . '">' . $label . ' URL: <input class="widefat" id="' . $this->get_field_id( $key ) .'" name="' . $this->get_field_name( $key ) . '" value="' . esc_url( $instance[$key] ) . '" /></label></p>';
-		
+
 	}
 }
 
