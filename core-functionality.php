@@ -69,3 +69,4 @@ include_once( CF_DIR . '/lib/functions/editor-style-refresh.php' );
  * @since 1.0.0
  */
 //include_once( CF_DIR . '/lib/widgets/widget-social.php' );
+add_filter( 'widget_text', 'do_shortcode'); // allow shortcodes in widgets too

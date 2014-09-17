@@ -17,11 +17,6 @@ class CF_General {
       add_action( 'admin_menu', array( $this, 'remove_menus' ) );
       add_filter( 'post_updated_messages', array( $this, 'set_updated_messages' ) );
 
-      /**
-       * Allow shortcodes in widgets
-       */
-      add_filter( 'widget_text', array( $this, 'do_shortcode' ) );
-
    }
 
    /**
