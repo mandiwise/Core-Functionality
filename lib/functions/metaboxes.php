@@ -4,6 +4,16 @@
  *
  */
 
+/**
+ * Include CMB2 Library
+ * See `/lib/cmb2/example-functions.php` for usage details
+ *
+ * @since 1.0.0
+ */
+if ( file_exists( CF_DIR . '/lib/cmb2/init.php' ) ) {
+	require_once( CF_DIR . '/lib/cmb2/init.php' );
+}
+
 class CF_Metaboxes {
 
 	/**
@@ -13,8 +23,9 @@ class CF_Metaboxes {
 	 */
 	public function __construct() {
 
-		add_filter( 'cmb_meta_boxes', array( $this, 'metabox_arrays' ) );
-		add_action( 'init', array( $this, 'initialize_cmb_metaboxes' ), 9999 );
+		add_filter( 'cmb2_meta_boxes', array( $this, 'metabox_arrays' ) );
+
+		// Add more hooks here for custom "show on" functions, etc...
 
 	}
 
@@ -32,14 +43,14 @@ class CF_Metaboxes {
 		$prefix = '_cmb_';
 
 		$meta_boxes['test_metabox'] = array(
-			'id'         => 'test_metabox',
-			'title'      => __( 'Test Metabox', 'cmb' ),
-			'pages'      => array( 'page', ), // Post type
-			'context'    => 'normal',
-			'priority'   => 'high',
-			'show_names' => true, // Show field names on the left
-			// 'cmb_styles' => true, // Enqueue the CMB stylesheet on the frontend
-			'fields'     => array(
+			'id'           => 'test_metabox',
+			'title'        => __( 'Test Metabox', 'cmb' ),
+			'object_types' => array( 'page', ), // Post type
+			'context'      => 'normal',
+			'priority'     => 'high',
+			'show_names'   => true, // Show field names on the left
+			// 'cmb_styles'   => true, // Enqueue the CMB stylesheet on the frontend
+			'fields'       => array(
 				array(
 					'name' => __( 'Test Text', 'cmb' ),
 					'desc' => __( 'field description (optional)', 'cmb' ),
@@ -52,14 +63,14 @@ class CF_Metaboxes {
 		);
 
 		$meta_boxes['about_page_metabox'] = array(
-			'id'         => 'about_page_metabox',
-			'title'      => __( 'About Page Metabox', 'cmb' ),
-			'pages'      => array( 'page', ), // Post type
-			'context'    => 'normal',
-			'priority'   => 'high',
-			'show_names' => true, // Show field names on the left
-			'show_on'    => array( 'key' => 'id', 'value' => array( 2, ), ), // Specific post IDs to display this metabox
-			'fields' => array(
+			'id'           => 'about_page_metabox',
+			'title'        => __( 'About Page Metabox', 'cmb' ),
+			'object_types' => array( 'page', ), // Post type
+			'context'      => 'normal',
+			'priority'     => 'high',
+			'show_names'   => true, // Show field names on the left
+			'show_on'      => array( 'key' => 'id', 'value' => array( 2, ), ), // Specific post IDs to display this metabox
+			'fields'       => array(
 				array(
 					'name' => __( 'Test Text', 'cmb' ),
 					'desc' => __( 'field description (optional)', 'cmb' ),
@@ -73,12 +84,12 @@ class CF_Metaboxes {
 		* Metabox for the user profile screen
 		*/
 		$meta_boxes['user_edit'] = array(
-			'id'         => 'user_edit',
-			'title'      => __( 'User Profile Metabox', 'cmb' ),
-			'pages'      => array( 'user' ), // Tells CMB to use user_meta vs post_meta
-			'show_names' => true,
-			// 'cmb_styles' => true, // Show cmb bundled styles.. not needed on user profile page
-			'fields'     => array(
+			'id'           => 'user_edit',
+			'title'        => __( 'User Profile Metabox', 'cmb' ),
+			'object_types' => array( 'user' ), // Tells CMB to use user_meta vs post_meta
+			'show_names'   => true,
+			// 'cmb_styles'   => true, // Show cmb bundled styles.. not needed on user profile page
+			'fields'       => array(
 				array(
 					'name' => __( 'Extra Info', 'cmb' ),
 					'desc' => __( 'field description (optional)', 'cmb' ),
@@ -107,19 +118,7 @@ class CF_Metaboxes {
 		return $meta_boxes;
 	}
 
-	/**
-	* Initialize Metabox Class
-	*
-	* @since 1.0.0
-	* See /lib/metabox/example-functions.php for more information
-	*/
-
-	public function initialize_cmb_metaboxes() {
-
-		if ( ! class_exists( 'cmb_Meta_Box' ) ) {
-			require_once( CF_DIR . '/lib/cmb-metabox/init.php' );
-		}
-	}
+	// Create custom "show on" functions, etc. here...
 
 }
 
