@@ -71,4 +71,4 @@ class CF_Post_Types {
 
 }
 
-new CF_Post_Types;
+new CF_Post_Types();

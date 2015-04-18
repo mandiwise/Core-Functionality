@@ -40,14 +40,14 @@ register_activation_hook( __FILE__, array( 'CF_General', 'plugin_activation' ) )
  *
  * @since 1.0.0
  */
-//include_once( CF_DIR . '/lib/functions/post-types.php' );
+// include_once( CF_DIR . '/lib/functions/post-types.php' );
 
 /**
  * Taxonomies
  *
  * @since 1.0.0
  */
-//include_once( CF_DIR . '/lib/functions/taxonomies.php' );
+// include_once( CF_DIR . '/lib/functions/taxonomies.php' );
 
 /**
  * Editor style refresh
@@ -61,7 +61,7 @@ include_once( CF_DIR . '/lib/functions/editor-style-refresh.php' );
  *
  * @since 1.0.0
  */
-//include_once( CF_DIR . '/lib/functions/metaboxes.php' );
+// include_once( CF_DIR . '/lib/functions/metaboxes.php' );
 
 /**
  * Widgets

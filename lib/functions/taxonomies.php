@@ -64,4 +64,4 @@ class CF_Taxonomies {
 
 }
 
-new CF_taxonomies;
+new CF_taxonomies();

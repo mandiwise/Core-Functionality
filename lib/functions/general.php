@@ -13,8 +13,20 @@ class CF_General {
     */
    public function __construct() {
 
+      // General housekeeping
       add_filter( 'http_request_args', array( $this, 'hide_plugin_from_updates' ), 5, 2 );
+      add_action( 'admin_notices', array( $this, 'hide_update_notice_nonadmins' ), 1 );
+
+      // Admin bar and menus customization
       add_action( 'admin_menu', array( $this, 'remove_menus' ) );
+      add_action( 'admin_init', array( $this, 'remove_submenus' ), 102 );
+
+      // Remove unnecessary WYSIWYG buttons
+      add_filter( 'tiny_mce_before_init', array( $this, 'disable_mce_format_options' ) );
+      add_filter( 'mce_buttons', array( $this, 'remove_mce_buttons' ) );
+      add_filter( 'mce_buttons_2', array( $this, 'remove_mce_buttons_2' ) );
+
+      // Customize post type UI
       add_filter( 'post_updated_messages', array( $this, 'set_updated_messages' ) );
 
    }
@@ -68,6 +80,17 @@ class CF_General {
    }
 
    /**
+    * Hide core update notice for all but Admins
+    *
+    * @since 1.1.0
+    */
+   public function hide_update_notice_nonadmins() {
+   	if ( ! current_user_can( 'update_core' ) ) {
+   		remove_action( 'admin_notices', 'update_nag', 3 );
+   	}
+   }
+
+   /**
     * Remove unused menu items by adding them to the array
     *
     * @since 1.0.0
@@ -82,6 +105,40 @@ class CF_General {
    		$value = explode( ' ',$menu[key($menu)][0] );
    		if( in_array( $value[0] != NULL?$value[0]:"" , $restricted ) ){ unset($menu[key($menu)] ); }
    	}
+   }
+
+   /**
+    * Remove unnecesary sub-menu links
+    *
+    * @since 1.0.0
+    */
+   public function remove_submenus() {
+   	remove_submenu_page( 'themes.php', 'theme-editor.php' );
+   	remove_submenu_page( 'plugins.php', 'plugin-editor.php' );
+   }
+
+   /**
+    * Customize TinyMCE buttons
+    *
+    * @since 1.0.0
+    */
+   public function disable_mce_format_options( $options ) {
+      $options['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Preformatted=pre';
+      return $options;
+   }
+
+   public function remove_mce_buttons( $buttons ) {
+      $buttons = array_diff(
+         $buttons, array( 'wp_more', )
+      );
+      return $buttons;
+   }
+
+   public function remove_mce_buttons_2( $buttons ) {
+      $buttons = array_diff(
+         $buttons, array( 'wp_more', 'forecolor', 'alignjustify', 'indent', 'outdent', 'underline', )
+      );
+      return $buttons;
    }
 
    /**
@@ -115,4 +172,4 @@ class CF_General {
 
 }
 
-new CF_General;
+new CF_General();
